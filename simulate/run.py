@@ -10,10 +10,10 @@ from rules import *
 # probabilities
 p_infected = 0.01         # chance a hibernating bat gets infected (given that WNS is on) on any given day
 p_dead = 0.005            # chance that an infected bat dies on any given day
-p_awake = 0.08            # OKAY # chance of a waking bat arousing a hibernating bat from torpor on any given day
 p_recover = 0.01          # chance of recovering and going back into hibernation on any given day
+p_awake = 0.08            # OKAY # chance of a waking bat arousing a hibernating bat from torpor on any given day
 p_hibernate = 0.5         # CONFIDENT # chance of a bat switching between hibernating and not (given that Te switches) on any given day
-p_influx = 0.0002         # CONFIDENT # chance of new bat due to immigration/birth per day
+p_netchange = 0.000215    # CONFIDENT # chance of new bat due to immigration/birth per day
 
 # ----------------------------------------
 # hibernacula-DEPENDENT initial conditions
@@ -96,7 +96,7 @@ def main():
         "p_awake": p_awake,
         "p_recover": p_recover,
         "p_hibernate": p_hibernate,
-        "p_influx": p_influx,
+        "p_netchange": p_netchange,
         "water": water,
         "food": food,
         "winter": winter
