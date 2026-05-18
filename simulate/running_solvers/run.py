@@ -30,10 +30,10 @@ birth_resistance_max = 0.02                # corresp. w/ rand.normalvariate(0, X
 
 # population counts
 Hi_num = 100            # hibernating bats
-NHi_NIn_num = 0         # non-hibernating non-infected bats
+NHIR_num = 0         # non-hibernating non-infected bats
 In_num = 1              # non-hibernating infected bats
 Ot_num = 0              # other bats
-Re_num = 0              # recovered bats
+Im_num = 0              # recovered bats
 
 # resource limits
 water = 1000            # OKAY # number of bats it would take to deplete water completely
@@ -51,11 +51,11 @@ res_num = 0             # starting resistance for bats in the hibernaculum
 def make_initial_state():
     return {
         "Hi": [[1, res_num] for _ in range(Hi_num)],
-        "NHi_NIn": [[1, res_num] for _ in range(NHi_NIn_num)],
+        "NHIR": [[1, res_num] for _ in range(NHIR_num)],
         "Ot": [[1, res_num] for _ in range(Ot_num)],
         "In": [[1, res_num] for _ in range(In_num)],
-        "De": [[0, res_num] for _ in range(Hi_num + NHi_NIn_num + In_num)],
-        "Re": [[0, res_num] for _ in range(Re_num)],
+        "De": [[0, res_num] for _ in range(Hi_num + NHIR_num + In_num)],
+        "Im": [[0, res_num] for _ in range(Im_num)],
         "Wa": 1,
         "Fo": 1,
         "Te": 0,
@@ -69,11 +69,11 @@ def simulate(initial_state, steps, parameters):
 
     history = {
         "Hi":[],
-        "NHi_NIn":[],
+        "NHIR":[],
         "Ot":[],
         "In":[],
         "De":[],
-        "Re":[],
+        "Im":[],
     }
 
     for t in range(steps):
@@ -86,11 +86,11 @@ def simulate(initial_state, steps, parameters):
         counts = count(state)
 
         history["Hi"].append(counts["Hi"])
-        history["NHi_NIn"].append(counts["NHi_NIn"])
+        history["NHIR"].append(counts["NHIR"])
         history["Ot"].append(counts["Ot"])
         history["In"].append(counts["In"])
         history["De"].append(counts["De"])
-        history["Re"].append(counts["Re"])
+        history["Im"].append(counts["Im"])
 
         state = step(state, parameters)
 
@@ -99,7 +99,7 @@ def simulate(initial_state, steps, parameters):
 
 def main():
 
-    inhabitant_nodes = ["Hi", "NHi_NIn", "In", "Ot", "De", "Re"]
+    inhabitant_nodes = ["Hi", "NHIR", "In", "Ot", "De", "Im"]
     resource_nodes = ["Wa", "Fo"]
     environment_nodes = ["Te", "Hu", "El", "Po", "Su", "Ba", "WNS"]
 

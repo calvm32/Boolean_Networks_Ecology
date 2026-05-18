@@ -1,0 +1,150 @@
+import random as rand
+import numpy as np
+
+from simulate.helper_funcs import *
+from simulate.rules import *
+
+avg_over = 20 # avg of X runs
+
+# ------------------------------------------
+# hibernacula-INDEPENDENT initial conditions
+# ------------------------------------------
+
+# probabilities
+p_infected = 0.005                          # chance a hibernating bat gets infected (given that WNS is on) on any given day
+p_dead = 0.005                              # chance that an infected bat dies on any given day
+p_recover = 1-(1-(1-p_dead)**30)**(1/30)    # CONFIDENT # chance of recovering and going back into hibernation on any given day
+p_awake = 0.08                              # OKAY # chance of a waking bat arousing a hibernating bat from torpor on any given day
+p_hibernate = 0.5                           # CONFIDENT # chance of a bat switching between hibernating and not (given that Te switches) on any given day
+p_netchange = 0.000215                      # CONFIDENT # chance of new bat due to immigration/birth per day
+contact_rate = 10                           # population-dependent rate of contact btwn health bat and WNS infected bat or surface
+
+# -----------------
+# types of immunity
+# -----------------
+
+immunity_period = 0                         # number of days spent in recovery before re-infection is possible
+birth_resistance_max = 0.02                # corresp. w/ rand.normalvariate(0, X)
+
+# ----------------------------------------
+# hibernacula-DEPENDENT initial conditions
+# ----------------------------------------
+
+# population counts
+Hi_num = 100            # hibernating bats
+NHIR_num = 0         # non-hibernating non-infected bats
+In_num = 1              # non-hibernating infected bats
+Ot_num = 0              # other bats
+Im_num = 0              # recovered bats
+
+# resource limits
+water = 1000            # OKAY # number of bats it would take to deplete water completely
+food = 1000             # OKAY # number of bats it would take to deplete food completely
+
+time = 3650             # total days
+winter = 120            # CONFIDENT # length of winter season in Nebraska mines
+
+# ----------
+# initialize
+# ----------
+
+res_num = 0             # starting resistance for bats in the hibernaculum
+
+def make_initial_state():
+    return {
+        "Hi": [[1, res_num] for _ in range(Hi_num)],
+        "NHIR": [[1, res_num] for _ in range(NHIR_num)],
+        "Ot": [[1, res_num] for _ in range(Ot_num)],
+        "In": [[1, res_num] for _ in range(In_num)],
+        "De": [[0, res_num] for _ in range(Hi_num + NHIR_num + In_num)],
+        "Im": [[0, res_num] for _ in range(Im_num)],
+        "Wa": 1,
+        "Fo": 1,
+        "Te": 0,
+        "Hu": 0,
+        "WNS": 0,
+    }
+
+history_avg = {
+    "Hi":[],
+    "NHIR":[],
+    "Ot":[],
+    "In":[],
+    "De":[],
+    "Im":[],
+}
+
+def simulate(initial_state, steps, parameters):
+    state = initial_state
+    winter = parameters["winter"]
+
+    history = {
+        "Hi":[],
+        "NHIR":[],
+        "Ot":[],
+        "In":[],
+        "De":[],
+        "Im":[],
+    }
+
+    for t in range(steps):
+
+        # Seasonal tempcycle
+        if (t % 365) <= winter: # winter
+            state["Te"] = 0   
+        else:
+            state["Te"] = 1 # summer
+        counts = count(state)
+
+        history["Hi"].append(counts["Hi"])
+        history["NHIR"].append(counts["NHIR"])
+        history["Ot"].append(counts["Ot"])
+        history["In"].append(counts["In"])
+        history["De"].append(counts["De"])
+        history["Im"].append(counts["Im"])
+
+        state = step(state, parameters)
+
+    return history
+
+
+def main():
+
+    inhabitant_nodes = ["Hi", "NHIR", "In", "Ot", "De", "Im"]
+    resource_nodes = ["Wa", "Fo"]
+    environment_nodes = ["Te", "Hu", "El", "Po", "Su", "Ba", "WNS"]
+
+    nodes = inhabitant_nodes + resource_nodes + environment_nodes
+
+    parameters = {
+        "p_infected": p_infected,
+        "p_dead": p_dead,
+        "p_awake": p_awake,
+        "p_recover": p_recover,
+        "p_hibernate": p_hibernate,
+        "p_netchange": p_netchange,
+        "water": water,
+        "food": food,
+        "water0": water,
+        "food0": food,
+        "winter": winter,
+        "immunity_period": immunity_period,
+        "contact_rate": contact_rate,
+        "birth_resistance_max": birth_resistance_max,
+    }
+
+    for i in range(avg_over):
+
+        history = simulate(make_initial_state(), steps=time, parameters=parameters)
+        
+        history_avg["Hi"].append(counts["Hi"])
+        history_avg["NHIR"].append(counts["NHIR"])
+        history_avg["Ot"].append(counts["Ot"])
+        history_avg["In"].append(counts["In"])
+        history_avg["De"].append(counts["De"])
+        history_avg["Im"].append(counts["Im"])
+    
+    plot_history_highlights(history_avg, winter)
+
+if __name__ == "__main__":
+    main()
