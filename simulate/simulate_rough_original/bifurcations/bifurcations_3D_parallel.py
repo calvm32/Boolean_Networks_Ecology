@@ -177,7 +177,7 @@ def main():
         jobs = [(i, j) for i in range(num_params) for j in range(num_params)]
         chunks = np.array_split(jobs, size)
     else:
-        chunks = none
+        chunks = None
 
     # send jobs to all ranks
     local_jobs = comm.scatter(chunks, root=0)

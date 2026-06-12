@@ -58,9 +58,9 @@ T_win = 210                                 # length of winter season in days in
                                             # considered in 5-7 months, depending on transition period T_seasonal
 
 # BAT IN/OUT FLUX
-lambda_win = 0.0001                         # population growth value during winter, 
+lambda_win = 0                              # population growth value during winter, 
                                             # considered in [0, 0.01] 
-lambda_sum = 0.05                           # population growth value during summer,
+lambda_sum = 0.001                           # population growth value during summer,
                                             # considered in [0.01, 0.1] 
 
 # -----------------
@@ -108,7 +108,7 @@ def simulate(initial_state, steps, parameters):
         "Ot":[],
         "In":[],
         "Im":[],
-        "De":0,
+        "De":[],
     }
 
     for t in range(steps):
@@ -124,11 +124,12 @@ def simulate(initial_state, steps, parameters):
         history["Ot"].append(counts["Ot"])
         history["In"].append(counts["In"])
         history["Im"].append(counts["Im"])
-        history["De"] = (counts["De"])
+        history["De"].append(counts["De"])
 
         state = step(state, parameters)
 
-        print(f"done{t}")
+        if t % 50 == 0:
+            print(f"done w/ simulation at step {t}")
 
     return history
 

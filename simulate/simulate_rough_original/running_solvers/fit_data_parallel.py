@@ -30,18 +30,24 @@ for d in data:
     obs_In.append(d["In"])
 
 def sample_params():
+    water = rand.uniform(100,5000)
+    food = rand.uniform(100,5000)
     return {
         "p_infected": 0, #rand.uniform(0.01, 0.8),
         "p_dead": 0, #rand.uniform(0.01, 0.8),
-        "p_awake": 0.08,
+        "p_awake": rand.uniform(0.01, 0.2),
         "p_recover": 0, #rand.uniform(0.01, 0.8),
-        "p_hibernate": 0.5,
+        "p_hibernate": rand.uniform(0.01, 0.8),
         "p_netchange": rand.uniform(0.0001, 0.0003),
-        "water": rand.uniform(100,500),
-        "food": rand.uniform(100,500),
-        "T_win": 120,
+        "water": water,
+        "food": water,
+        "water0": water,
+        "food0": food,
+        "T_win": T_win,
         "immunity_period": immunity_period,
-        "contact_rate": contact_rate
+        "contact_rate": contact_rate,
+        "birth_resistance_max": birth_resistance_max,
+        "recover_resistance_max": recover_resistance_max,
     }
 
 # ------------------------------------------
@@ -190,9 +196,9 @@ def main():
         "recover_resistance_max": recover_resistance_max,
     }
 
-    best = none
+    best = None
     best_loss = float("inf")
-    local_best = none
+    local_best = None
     local_best_loss = float("inf")
 
     n_iter = 10000
@@ -219,7 +225,7 @@ def main():
 
     if rank == 0:
         best_loss = float("inf")
-        best_params = none
+        best_params = None
 
         for L, p in all_results:
             if L < best_loss:
