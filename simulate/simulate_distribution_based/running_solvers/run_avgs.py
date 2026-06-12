@@ -3,6 +3,7 @@ import numpy as np
 
 from simulate.simulate_distribution_based.helper_funcs import *
 from simulate.simulate_distribution_based.rules import *
+from simulate.simulate_distribution_based.simulate import *
 
 # ==========================================================================================================================
 # ==========================================================================================================================
