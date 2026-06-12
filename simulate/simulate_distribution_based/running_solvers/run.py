@@ -2,7 +2,11 @@ import random as rand
 import numpy as np
 
 from simulate.simulate_distribution_based.helper_funcs import *
-from simulate.simulate_rough_original.rules import *
+from simulate.simulate_distribution_based.rules import *
+
+# ==========================================================================================================================
+# ==========================================================================================================================
+# ==========================================================================================================================
 
 # -------------------------
 # set up initial population
@@ -21,7 +25,9 @@ bigbrown_cluster_sizeMAX = 9
 Hi_list = [[tricolor_num, tricolor_cluster_sizeMIN, tricolor_cluster_sizeMAX], 
            [bigbrown_num, bigbrown_cluster_sizeMIN, bigbrown_cluster_sizeMAX]] 
 
-# NOTICE : the remaining populations (Ot, Im, In) all start with 0 inhabitants
+fraction_infected = 0   # choose in [0, 1]
+
+# NOTICE : the remaining populations (Ot, Im) all start with 0 inhabitants
 # NOTICE : resistance starts at 0 for every bat
 
 # ---------------------------
@@ -77,75 +83,17 @@ recover_resistance_max = 0.02               # resistance after recovery, corresp
 # initialize
 # ----------
 
-time = 400 # total days
-empty_pop = np.empty((0,5), dtype=float)
+time = 3650             # total days
 
-def make_initial_state():
-    # NOTICE : each inhabitant node contains the following information:
-    # [ ON/OFF, 
-    #   resistance number AKA res_num, 
-    #   clustering number AKA mu_i, 
-    #   infection number MINUS days spent infected (i.e. days left infirm), 
-    #   0 for just entered hibernation OR 1 for exited hibernation at least once (to track arousal periods)
-    # ]
-    return {
-        "Hi": [
-                [1, 0, rand.uniform(Hi_list[i][1], Hi_list[i][2]), 0, 0]
-                for i in range(len(Hi_list))
-                for _ in range(Hi_list[i][0])
-              ],
-        "Ot": empty_pop.copy(),
-        "In": empty_pop.copy(),
-        "Im": empty_pop.copy(),
-        "De": 0, # only need total numbers of dead
-        "Re": 1,
-        "Te": 0,
-        "Hu": 0,
-        "PD": 0,
-    }
-
-def simulate(initial_state, steps, parameters):
-    state = initial_state
-    T_win = parameters["T_win"]
-
-    history = {
-        "Hi": np.empty(steps,dtype=np.int32),
-        "Ot": np.empty(steps,dtype=np.int32),
-        "In": np.empty(steps,dtype=np.int32),
-        "Im": np.empty(steps,dtype=np.int32),
-        "De": np.empty(steps,dtype=np.int32),
-    }
-
-    for t in range(steps):
-
-        # Seasonal tempcycle
-        if (t % 365) <= T_win: # T_win
-            state["Te"] = 0   
-        else:
-            state["Te"] = 1 # summer
-        counts = count(state)
-
-        history["Hi"][t] = (counts["Hi"])
-        history["Ot"][t] = (counts["Ot"])
-        history["In"][t] = (counts["In"])
-        history["Im"][t] = (counts["Im"])
-        history["De"][t] = (counts["De"])
-
-        state = step(state, parameters)
-
-        if t % 50 == 0:
-            print(f"done w/ simulation at step {t}")
-
-    return history
-
+# ==========================================================================================================================
+# ==========================================================================================================================
+# ==========================================================================================================================
 
 def main():
     parameters = {
         "inf_alpha": inf_alpha,
         "inf_beta": inf_beta,
         "delta": delta,
-        "awake_a": awake_a,
-        "awake_b": awake_b,
         "T_inf": T_inf,
         "T_TBD": T_TBD,
         "T_AD": T_AD,
@@ -158,7 +106,7 @@ def main():
         "recover_resistance_max": recover_resistance_max,
     }
 
-    history = simulate(make_initial_state(), steps=time, parameters=parameters)
+    history = simulate(make_initial_state(Hi_list, fraction_infected), steps=time, parameters=parameters)
     plot_history_highlights(history, T_win)
 
 if __name__ == "__main__":
