@@ -77,21 +77,26 @@ recover_resistance_max = 0.02               # resistance after recovery, corresp
 # initialize
 # ----------
 
-time = 3650             # total days
+time = 400 # total days
+empty_pop = np.empty((0,5), dtype=float)
 
 def make_initial_state():
     # NOTICE : each inhabitant node contains the following information:
-    # [ON/OFF, 
-    #  resistance number, 
-    #  clustering number, 
-    #  infection number MINUS days spent infected (i.e. days left infirm), 
-    #  0 for just entered hibernation OR 1 for exited hibernation at least once (to track arousal periods)
+    # [ ON/OFF, 
+    #   resistance number AKA res_num, 
+    #   clustering number AKA mu_i, 
+    #   infection number MINUS days spent infected (i.e. days left infirm), 
+    #   0 for just entered hibernation OR 1 for exited hibernation at least once (to track arousal periods)
     # ]
     return {
-        "Hi": [[1, 0, rand.uniform(Hi_list[i][1], Hi_list[i][2]), 0, 0] for i in range(len(Hi_list)) for _ in range(Hi_list[i][0])],
-        "Ot": [],
-        "In": [],
-        "Im": [],
+        "Hi": [
+                [1, 0, rand.uniform(Hi_list[i][1], Hi_list[i][2]), 0, 0]
+                for i in range(len(Hi_list))
+                for _ in range(Hi_list[i][0])
+              ],
+        "Ot": empty_pop.copy(),
+        "In": empty_pop.copy(),
+        "Im": empty_pop.copy(),
         "De": 0, # only need total numbers of dead
         "Re": 1,
         "Te": 0,
@@ -104,11 +109,11 @@ def simulate(initial_state, steps, parameters):
     T_win = parameters["T_win"]
 
     history = {
-        "Hi":[],
-        "Ot":[],
-        "In":[],
-        "Im":[],
-        "De":[],
+        "Hi": np.empty(steps,dtype=np.int32),
+        "Ot": np.empty(steps,dtype=np.int32),
+        "In": np.empty(steps,dtype=np.int32),
+        "Im": np.empty(steps,dtype=np.int32),
+        "De": np.empty(steps,dtype=np.int32),
     }
 
     for t in range(steps):
@@ -120,11 +125,11 @@ def simulate(initial_state, steps, parameters):
             state["Te"] = 1 # summer
         counts = count(state)
 
-        history["Hi"].append(counts["Hi"])
-        history["Ot"].append(counts["Ot"])
-        history["In"].append(counts["In"])
-        history["Im"].append(counts["Im"])
-        history["De"].append(counts["De"])
+        history["Hi"][t] = (counts["Hi"])
+        history["Ot"][t] = (counts["Ot"])
+        history["In"][t] = (counts["In"])
+        history["Im"][t] = (counts["Im"])
+        history["De"][t] = (counts["De"])
 
         state = step(state, parameters)
 
@@ -142,9 +147,9 @@ def main():
         "awake_a": awake_a,
         "awake_b": awake_b,
         "T_inf": T_inf,
-        "T_TBD": T_inf,
-        "T_AD": T_inf,
-        "T_seasonal": T_inf,
+        "T_TBD": T_TBD,
+        "T_AD": T_AD,
+        "T_seasonal": T_seasonal,
         "T_win": T_win,
         "lambda_win": lambda_win,
         "lambda_sum": lambda_sum,
