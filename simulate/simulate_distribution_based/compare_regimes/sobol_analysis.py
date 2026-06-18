@@ -135,7 +135,7 @@ def main():
         for name, val in zip(problem["names"], row):
             parameters[name] = val
             if name == "inf_alpha":
-                parameters[name] = max(1.0, val)    # keep α > 1
+                parameters[name] = max(1.0, val) # keep alpha > 1
 
         hist = simulate(make_initial_state(Hi_list, fraction_infected, parameters["T_inf"]), time, parameters)
         m = compute_metrics(hist, Hi_list)
