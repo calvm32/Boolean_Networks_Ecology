@@ -3,7 +3,7 @@ import numpy as np
 import copy
 from mpi4py import MPI
 from scipy.special import gammaln
-import time
+import time as timer
 
 from simulate.simulate_CURRENT.helper_funcs import *
 from simulate.simulate_CURRENT.rules import *
@@ -14,7 +14,7 @@ from simulate.data import *
 # ==========================================================================================================================
 # ==========================================================================================================================
 
-start = time.perf_counter()
+start = timer.perf_counter()
 
 # -------------------------
 # set up initial population
@@ -291,7 +291,7 @@ def main():
     if rank == 0:
         best_final_params = array_to_params(gbest)
 
-        end = time.perf_counter()
+        end = timer.perf_counter()
 
         elapsed_seconds = end - start
         print(f"Wall-clock time: {elapsed_seconds} seconds")
