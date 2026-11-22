@@ -98,7 +98,7 @@ res_gain = 0.02                             # resistance AFTER recovery
 # latitudinally-averaged parameters
 # ---------------------------------
 
-T_seasonal, win_length, win_start, lambda_sum, lambda_win = latitude2_SouthMidwest() # or latitude2_SouthMidwest()
+T_seasonal, win_length, win_start, lambda_sum, lambda_win = latitude1_NorthMidwest() # or latitude2_SouthMidwest()
 
 # ----------
 # initialize
@@ -108,7 +108,7 @@ delta = 0.01                                # P. destructans decay rate, conside
 
 time = 365*20 # total days
 init_fractions = [0.01, 0.01, 0.10, 0.25]
-NAME_APPEND = "delta0.01_lat2SMW"
+NAME_APPEND = "delta0.01_lat1NMW"
 
 # ==========================================================================================================================
 # ==========================================================================================================================

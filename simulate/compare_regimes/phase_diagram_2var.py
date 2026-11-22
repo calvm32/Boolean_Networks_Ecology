@@ -110,16 +110,16 @@ T_seasonal, win_length, win_start, lambda_sum, lambda_win = latitude1_NorthMidwe
 # phase diagram comparison variables
 # ----------------------------------
 
-times_list = [365, 3*365, 5*365, 10*365] # must be even and in ascending order
+times_list = [365, 3*365, 10*365, 20*365] # must be even and in ascending order
 num_params = 20 # how many samples in the given range
 num_seeds = 4   # number of stochastic realizations per cell (avgd later)
 
-# longterm survival: delta vs. res_gain
-param_change = ["delta", "res_gain"]
-parameters_list = [np.linspace(0.005,0.05,num_params), np.linspace(0,1,num_params)]
-NAME_APPEND = "final_persistence:delta_vs_resgain_lat1NMW"
-param1_label = r"Fungal decay rate ($\delta$)"
-param2_label = r"Acquired resistance ($r_{\mathrm{gain}}$)"
+# # longterm survival: delta vs. res_gain
+# param_change = ["delta", "res_gain"]
+# parameters_list = [np.linspace(0.005,0.05,num_params), np.linspace(0,1,num_params)]
+# NAME_APPEND = "final_persistence:delta_vs_resgain_lat2SMW"
+# param1_label = r"Fungal decay rate ($\delta$)"
+# param2_label = r"Acquired resistance ($r_{\mathrm{gain}}$)"
 
 # # immune paradox 1: inf_alpha vs. res_gain
 # param_change = ["inf_alpha", "res_gain"]
@@ -128,12 +128,12 @@ param2_label = r"Acquired resistance ($r_{\mathrm{gain}}$)"
 # param1_label = r"Infection parameter ($\alpha_{\mathrm{inf}}$)"
 # param2_label = r"Acquired resistance ($r_{\mathrm{gain}}$)"
 
-# # longevity: T_inf vs. delta
-# param_change = ["T_inf", "delta"]
-# parameters_list = [np.linspace(5,45,num_params), np.linspace(0.005,0.05,num_params)]
-# NAME_APPEND = "longevity:Tinf_vs_delta_lat2SMW"
-# param1_label = r"Infected period ($T_{\mathrm{inf}}$)"
-# param2_label = r"Fungal decay rate ($\delta$)"
+# longevity: T_inf vs. delta
+param_change = ["T_inf", "delta"]
+parameters_list = [np.linspace(5,45,num_params), np.linspace(0.005,0.05,num_params)]
+NAME_APPEND = "longevity:Tinf_vs_delta_lat1NMW"
+param1_label = r"Infected period ($T_{\mathrm{inf}}$)"
+param2_label = r"Fungal decay rate ($\delta$)"
 
 # # peak vs. longterm: T_inf vs. res_gain
 # param_change = ["T_inf", "res_gain"]
