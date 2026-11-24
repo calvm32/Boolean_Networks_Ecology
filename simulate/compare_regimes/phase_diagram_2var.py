@@ -104,7 +104,7 @@ res_gain = 0.02                             # resistance AFTER recovery
 # latitudinally-averaged parameters
 # ---------------------------------
 
-T_seasonal, win_length, win_start, lambda_sum, lambda_win = latitude1_NorthMidwest() # or latitude2_SouthMidwest()
+T_seasonal, win_length, win_start, lambda_sum, lambda_win = latitude2_SouthMidwest() # or latitude2_SouthMidwest()
 
 # ----------------------------------
 # phase diagram comparison variables
@@ -129,11 +129,17 @@ num_seeds = 4   # number of stochastic realizations per cell (avgd later)
 # param2_label = r"Acquired resistance ($r_{\mathrm{gain}}$)"
 
 # longevity: T_inf vs. delta
-param_change = ["T_inf", "delta"]
-parameters_list = [np.linspace(5,45,num_params), np.linspace(0.005,0.05,num_params)]
-NAME_APPEND = "longevity:Tinf_vs_delta_lat1NMW"
-param1_label = r"Infected period ($T_{\mathrm{inf}}$)"
-param2_label = r"Fungal decay rate ($\delta$)"
+# param_change = ["T_inf", "delta"]
+# parameters_list = [np.linspace(5,45,num_params), np.linspace(0.005,0.05,num_params)]
+# NAME_APPEND = "longevity:Tinf_vs_delta_lat1NMW"
+# param1_label = r"Infected period ($T_{\mathrm{inf}}$)"
+# param2_label = r"Fungal decay rate ($\delta$)"
+
+param_change = ["delta", "T_inf"]
+parameters_list = [np.linspace(0.005,0.05,num_params), np.linspace(5,45,num_params)]
+NAME_APPEND = "longevity:delta_vs_Tinf_lat2MMW"
+param1_label = r"Fungal decay rate ($\delta$)"
+param2_label = r"Infected period ($T_{\mathrm{inf}}$)"
 
 # # peak vs. longterm: T_inf vs. res_gain
 # param_change = ["T_inf", "res_gain"]
