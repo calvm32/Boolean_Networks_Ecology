@@ -106,13 +106,13 @@ res_gain = 0.02                             # resistance AFTER recovery
 # ---------------------------------
 
 T_seasonal, win_length, win_start, lambda_sum, lambda_win = latitude1_NorthMidwest() # or latitude2_SouthMidwest()
-NAME_APPEND = "lat1NMW"
+NAME_APPEND = "lat1NMW_FINAL"
 
 # ----------
 # initialize
 # ----------
 
-time = 365*10 # total days
+time = 365*20 # total days
 
 # ==========================================================================================================================
 # ==========================================================================================================================
@@ -152,7 +152,7 @@ def main():
         ],
     }
 
-    num_samples = 2**6 #2**12 for large runs
+    num_samples = 2**12 #2**12 for large runs
     param_values = sobol_sample.sample(problem, num_samples, calc_second_order=False)
 
     Y_Pmax = np.zeros(len(param_values))
