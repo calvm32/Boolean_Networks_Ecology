@@ -1,0 +1,10 @@
+{
+  "script": "simulate/compare_regimes/sobol_analysis_parallel_SLURM.py",
+  "timestamp": "20261122_112232",
+  "custom_name": "LAT2SMW",
+  "allocated_nodes": 32,
+  "tasks_per_node": 16,
+  "walltime": "16:00:00",
+  "memory_gb": 64,
+  "user": "cheldt"
+}

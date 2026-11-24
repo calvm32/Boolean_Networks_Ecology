@@ -1,0 +1,60 @@
+===================================================
+Starting Execution: sobol_analysis_parallel_SLURM
+===================================================
+[all] 16 MPI rank(s), N=2^6, 7300 days per simulation
+[prepare] wrote 640 parameter sets (N=2^6, D=8) to results_and_data/20261122_110520_sobol_analysis_parallel_SLURM_testsobol/results_and_data/sobol_work_lat2SMW_N64/param_values.npy
+[prepare] each row = 5 replicate simulations of 7300 days
+[run] task 1/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 2/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 3/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 4/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 5/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 6/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 7/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 8/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 9/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 10/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 11/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 12/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 13/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 14/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 15/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 0/16: 40 rows assigned, 0 already done, 40 to run on 1 worker(s)
+[run] task 0: 2/40 rows  (14s elapsed, 7.1s/row wall)
+[run] task 0: 4/40 rows  (35s elapsed, 8.6s/row wall)
+[run] task 0: 6/40 rows  (69s elapsed, 11.4s/row wall)
+[run] task 0: 8/40 rows  (92s elapsed, 11.6s/row wall)
+[run] task 0: 10/40 rows  (111s elapsed, 11.1s/row wall)
+[run] task 0: 12/40 rows  (139s elapsed, 11.6s/row wall)
+[run] task 0: 14/40 rows  (174s elapsed, 12.4s/row wall)
+[run] task 0: 16/40 rows  (192s elapsed, 12.0s/row wall)
+[run] task 0: 18/40 rows  (208s elapsed, 11.5s/row wall)
+[run] task 0: 20/40 rows  (217s elapsed, 10.9s/row wall)
+[run] task 0: 22/40 rows  (245s elapsed, 11.1s/row wall)
+[run] task 0: 24/40 rows  (272s elapsed, 11.3s/row wall)
+[run] task 0: 26/40 rows  (293s elapsed, 11.3s/row wall)
+[run] task 0: 28/40 rows  (325s elapsed, 11.6s/row wall)
+[run] task 0: 30/40 rows  (343s elapsed, 11.4s/row wall)
+[run] task 0: 32/40 rows  (364s elapsed, 11.4s/row wall)
+[run] task 0: 34/40 rows  (380s elapsed, 11.2s/row wall)
+[run] task 0: 36/40 rows  (401s elapsed, 11.1s/row wall)
+[run] task 0: 38/40 rows  (428s elapsed, 11.3s/row wall)
+[run] task 3 finished: 40 rows in shard, 0 with NaN/failure
+[run] task 13 finished: 40 rows in shard, 0 with NaN/failure
+[run] task 7 finished: 40 rows in shard, 0 with NaN/failure
+[run] task 6 finished: 40 rows in shard, 0 with NaN/failure
+[run] task 0: 40/40 rows  (450s elapsed, 11.2s/row wall)
+[run] task 0 finished: 40 rows in shard, 0 with NaN/failure
+[run] task 12 finished: 40 rows in shard, 0 with NaN/failure
+[run] task 11 finished: 40 rows in shard, 0 with NaN/failure
+[run] task 5 finished: 40 rows in shard, 0 with NaN/failure
+[run] task 4 finished: 40 rows in shard, 0 with NaN/failure
+[run] task 10 finished: 40 rows in shard, 0 with NaN/failure
+[run] task 14 finished: 40 rows in shard, 0 with NaN/failure
+[run] task 8 finished: 40 rows in shard, 0 with NaN/failure
+[run] task 9 finished: 40 rows in shard, 0 with NaN/failure
+[run] task 1 finished: 40 rows in shard, 0 with NaN/failure
+[run] task 2 finished: 40 rows in shard, 0 with NaN/failure
+[run] task 15 finished: 40 rows in shard, 0 with NaN/failure
+[analyze] 16 shard(s), 640/640 rows present, 0 missing, 0 failed (NaN)
+[analyze] wrote results_and_data/20261122_110520_sobol_analysis_parallel_SLURM_testsobol/results_and_data/sobol_analysis_data.csv and 4 PDFs to results_and_data/20261122_110520_sobol_analysis_parallel_SLURM_testsobol/results_and_data

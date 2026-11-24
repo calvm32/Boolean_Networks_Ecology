@@ -51,7 +51,7 @@ FIGURES_DIR = os.path.join(OUTPUT_DIR, 'results_and_data')
 # MODEL CONFIGURATION
 # -------------------
 
-avg_over = 5
+avg_over = 10
 
 def sample_params():
     return {
@@ -114,7 +114,7 @@ time = 365*20  # total days (20 years)
 # Sobol base sample size: N = 2**LOG2_SAMPLES.  Total simulated parameter sets = N*(D+2) = N*10.
 #   6  ->    64 base samples ->    640 rows   (timing / test runs)
 #   12 -> 4096 base samples -> 40,960 rows   (full runs)
-LOG2_SAMPLES = int(os.environ.get("SOBOL_LOG2_SAMPLES", 6))
+LOG2_SAMPLES = int(os.environ.get("SOBOL_LOG2_SAMPLES", 12))
 
 HISTORY_KEYS = ("Hi", "Ot", "In", "Im", "De")
 

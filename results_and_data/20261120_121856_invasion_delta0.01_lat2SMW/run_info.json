@@ -1,0 +1,10 @@
+{
+  "script": "simulate/compare_regimes/invasion.py",
+  "timestamp": "20261120_121856",
+  "custom_name": "delta0.01_lat2SMW",
+  "allocated_nodes": 1,
+  "tasks_per_node": 1,
+  "walltime": "00:10:00",
+  "memory_gb": 4,
+  "user": "cheldt"
+}
