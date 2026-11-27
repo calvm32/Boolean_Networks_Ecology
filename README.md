@@ -1,4 +1,4 @@
-# Stochastic Boolean Network Model of White-Nose Syndrome in Bat Hibernacula
+# Infection, Immunity, and Population Dynamics in Midwestern Bat Hibernacula: A Boolean Network Model of White-Nose Syndrome
 
 Computational simulation, parameter estimation, sensitivity analysis, and phase-diagram codebase accompanying our manuscript on White-Nose Syndrome (WNS) dynamics in Midwestern bat hibernacula (submitted to *Ecological Modelling*, November 2026; preprint available soon on arXiv).
 
@@ -38,6 +38,7 @@ Boolean_networks_ecology/
 
 ## Installation
 Create and activate a virtual environment, then install the package and dependencies:
+
 (Bash)
 ```
 python3 -m venv .venv
@@ -64,8 +65,8 @@ If you use this code in your research, please cite our manuscript:
 
 ```
 @unpublished{heldt2026wns,
-  author = {Heldt, Calum and ...},
-  title  = {A Stochastic Boolean Network Model of White-Nose Syndrome Dynamics in Midwestern Bat Hibernacula},
+  author = {Heldt, Calum and Linares, Nicholas and Velcsov, Mihaela Teodora},
+  title  = {Infection, Immunity, and Population Dynamics in Midwestern Bat Hibernacula: A Boolean Network Model of White-Nose Syndrome},
   note   = {Submitted to Ecological Modelling; preprint on arXiv},
   year   = {2026}
 }
